@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public float range = 100f;
-    public int totalBullets = 30;
-    public int bulletLeft;
+    public float range = 100f; // alcance max   
+    public int totalBullets = 30; //bala por pente
+    public int bulletLeft; //total de balas por pente
+    public int currentBullets; //numero de balas no pente atual
 
     public float fireRate = 0.1f;
 
     private float fireTimer;
 
     public Transform shootPoint;
+    public ParticleSystem fireEffect;
+
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        currentBullets = totalBullets;
     }
 
     // Update is called once per frame
@@ -25,8 +30,12 @@ public class Weapon : MonoBehaviour
     {
         if(Input.GetButton("Fire1"))
         {
-            //execute fire
-            Fire();
+            if(currentBullets > 0)
+            {
+                //execute fire
+                Fire();
+            }
+            
         }
 
         if(fireTimer < fireRate)
@@ -48,7 +57,9 @@ public class Weapon : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
         }
-
+        anim.CrossFadeInFixedTime("Fire", 0.01f);
+        fireEffect.Play();
+        currentBullets--;
         fireTimer = 0f;
     }
 }
