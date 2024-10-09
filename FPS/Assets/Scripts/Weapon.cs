@@ -16,6 +16,9 @@ public class Weapon : MonoBehaviour
     public Transform shootPoint;
     public ParticleSystem fireEffect;
 
+    public GameObject hitEffect;
+    public GameObject bullletImpact;
+
     private Animator anim;
 
     private bool isReloading;
@@ -74,7 +77,12 @@ public class Weapon : MonoBehaviour
 
         if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, range))
         {
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
+            GameObject hitParticle = Instantiate(hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+            GameObject bullet = Instantiate(bullletImpact, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+
+            Destroy(hitParticle, 1f);
+            Destroy(bullet, 3f);
         }
         anim.CrossFadeInFixedTime("Fire", 0.01f);
         fireEffect.Play();

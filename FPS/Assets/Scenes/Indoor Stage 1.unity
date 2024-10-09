@@ -1431,6 +1431,41 @@ MonoBehaviour:
   minAmount: 0.04
   maxAmount: 0.4
   smoothAmount: 6.16
+--- !u!1 &1875330752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875330753}
+  m_Layer: 0
+  m_Name: CamShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1875330753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875330752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2106717409}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2106717409 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4411051679773329859, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
+  m_PrefabInstance: {fileID: 4411051679754737202}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2110089605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,13 +1567,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4411051679754737215, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 1617700753897852, guid: 2fc51477906b5d44b93e53cc25b2d012, type: 3}
+    - target: {fileID: 4411051679754737215, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
       propertyPath: bulletLeft
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4411051679754737215, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
+      propertyPath: shootPoint
+      value: 
+      objectReference: {fileID: 1875330753}
+    - target: {fileID: 4411051679754737215, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
       propertyPath: shootSound
       value: 
       objectReference: {fileID: 8300000, guid: ade89ba03c7faf048abc776e35476c87, type: 3}
+    - target: {fileID: 4411051679754737215, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
+      propertyPath: bullletImpact
+      value: 
+      objectReference: {fileID: 1235035097298946, guid: 13a41486f54c3634fb3e501928c77d9d, type: 3}
     - target: {fileID: 4411051679772841441, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
       propertyPath: m_Name
       value: FPSController
