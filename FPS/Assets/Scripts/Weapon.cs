@@ -26,6 +26,15 @@ public class Weapon : MonoBehaviour
     public AudioClip shootSound;
     private AudioSource audioSource;
 
+    public enum ShootMode
+    {
+        Auto,
+        Semi
+    }
+
+    public ShootMode shootMode;
+    private bool shootInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,18 +47,42 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButton("Fire1"))
+        //if(Input.GetButton("Fire1"))
+        //{
+        //    if(currentBullets > 0)
+        //    {
+        //        //execute fire
+        //        Fire();
+        //    } 
+        //    else if(bulletLeft > 0)
+        //    {
+        //        DoReload();
+        //    }
+            
+        //}
+
+        switch(shootMode)
         {
-            if(currentBullets > 0)
+            case ShootMode.Auto:
+            shootInput = Input.GetButton("Fire1");
+            break;
+
+            case ShootMode.Semi:
+            shootInput = Input.GetButtonDown("Fire1");
+            break;
+        }
+
+        if(shootInput)
+        {
+            if (currentBullets > 0)
             {
-                //execute fire
                 Fire();
-            } 
+            }
             else if(bulletLeft > 0)
             {
                 DoReload();
             }
-            
+
         }
 
         if(Input.GetKeyDown(KeyCode.R))
