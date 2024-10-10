@@ -26,6 +26,8 @@ public class Weapon : MonoBehaviour
     public AudioClip shootSound;
     private AudioSource audioSource;
 
+    public int damage;
+
     public enum ShootMode
     {
         Auto,
@@ -113,9 +115,15 @@ public class Weapon : MonoBehaviour
             //Debug.Log(hit.transform.name);
             GameObject hitParticle = Instantiate(hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
             GameObject bullet = Instantiate(bullletImpact, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+            bullet.transform.SetParent(hit.transform);
 
             Destroy(hitParticle, 1f);
             Destroy(bullet, 3f);
+
+            if(hit.transform.GetComponent<ObjectHealth>())
+            {
+                hit.transform.GetComponent<ObjectHealth>().ApplyDamage(damage);
+            }
         }
         anim.CrossFadeInFixedTime("Fire", 0.01f);
         fireEffect.Play();
