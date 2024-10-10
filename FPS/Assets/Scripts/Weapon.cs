@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Properties")]
+    public int damage;
     public float range = 100f; // alcance max   
     public int totalBullets = 30; //bala por pente
     public int bulletLeft = 90; //total de balas por pente
@@ -13,6 +15,7 @@ public class Weapon : MonoBehaviour
 
     private float fireTimer;
 
+    [Header("Shoot Config")]
     public Transform shootPoint;
     public ParticleSystem fireEffect;
 
@@ -23,10 +26,15 @@ public class Weapon : MonoBehaviour
 
     private bool isReloading;
 
+    [Header("Sounds")]
     public AudioClip shootSound;
     private AudioSource audioSource;
 
-    public int damage;
+    [Header("Aim")]
+    public Vector3 aimpos;
+    public float aimSpeed;
+    private Vector3 originalPos;
+
 
     public enum ShootMode
     {
@@ -44,6 +52,7 @@ public class Weapon : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         currentBullets = totalBullets;
+        originalPos = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -99,6 +108,8 @@ public class Weapon : MonoBehaviour
         {
             fireTimer += Time.deltaTime;
         }
+
+        ToAim();
     }
 
     private void Fire()
@@ -130,6 +141,18 @@ public class Weapon : MonoBehaviour
         PlayShootSound();
         currentBullets--;
         fireTimer = 0f;
+    }
+
+    public void ToAim()
+    {
+        if(Input.GetButton("Fire2") && !isReloading)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, aimpos, Time.deltaTime * aimSpeed);
+        }
+        else
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originalPos, Time.deltaTime * aimSpeed);
+        }
     }
 
     void FixedUpdate()
