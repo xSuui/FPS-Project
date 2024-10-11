@@ -14,8 +14,14 @@ public class Soldier : MonoBehaviour
     public float followDistance = 20f;
     public float atkProbality;
 
-    public int damage;
-    public int health;
+    public int damage = 20; //total de dano q dá
+    public int health = 100; //total de vida q ele tem
+
+    public Transform shootPoint;
+    public float range = 100f;
+
+    public float fireRate = 0.5f;
+    private float fireTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -39,9 +45,11 @@ public class Soldier : MonoBehaviour
                 if(dist < atkDistance)
                 {
                     shoot = true;
+                    Fire();
                 }
 
                 navMesh.SetDestination(Player.transform.position);
+                transform.LookAt(Player.transform);
             }
 
             if(!follow || shoot)
@@ -51,6 +59,45 @@ public class Soldier : MonoBehaviour
 
             anim.SetBool("shoot", shoot);
             anim.SetBool("run", follow);
+        }
+
+        if(fireTimer < fireRate)
+        {
+            fireTimer += Time.deltaTime;
+        }
+    }
+
+    public void Fire()
+    {
+        if(fireTimer < fireRate)
+        {
+            return;
+        }
+
+        RaycastHit hit;
+
+         if(Physics.Raycast(shootPoint.position,shootPoint.forward, out hit, range))
+        {
+            if(hit.transform.GetComponent<PlayerHealth>())
+            {
+                hit.transform.GetComponent<PlayerHealth>().ApplyDamage(damage);
+            }
+        }
+
+        fireTimer = 0;
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        health -= damage;
+        //Debug.Log("Hit");
+
+        if(health <= 0)
+        {
+            navMesh.enabled = false;
+            anim.SetBool("shoot", false);
+            anim.SetBool("run", false);
+            anim.SetTrigger("die");
         }
     }
 }

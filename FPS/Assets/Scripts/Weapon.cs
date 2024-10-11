@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Weapon : MonoBehaviour
 {
     [Header("Properties")]
-    public int damage;
+    public int damage = 20;
     public float range = 100f; // alcance max   
     public int totalBullets = 30; //bala por pente
     public int bulletLeft = 90; //total de balas por pente
@@ -149,6 +149,12 @@ public class Weapon : MonoBehaviour
             if(hit.transform.GetComponent<ObjectHealth>())
             {
                 hit.transform.GetComponent<ObjectHealth>().ApplyDamage(damage);
+            }
+            
+            if (hit.transform.GetComponent<Soldier>())
+            {
+                //Debug.Log("Hit");
+                hit.transform.GetComponent<Soldier>().ApplyDamage(damage);
             }
         }
         anim.CrossFadeInFixedTime("Fire", 0.01f);
