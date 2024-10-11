@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class Weapon : MonoBehaviour
     public float aimSpeed;
     private Vector3 originalPos;
 
+    [Header("UI")]
+    public Text ammoText;
 
     public enum ShootMode
     {
@@ -47,6 +50,11 @@ public class Weapon : MonoBehaviour
     public ShootMode shootMode;
     private bool shootInput;
 
+    void OnEnable()
+    {
+        UpdateAmmoText();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +63,8 @@ public class Weapon : MonoBehaviour
 
         currentBullets = totalBullets;
         originalPos = transform.localPosition;
+
+        UpdateAmmoText();
     }
 
     // Update is called once per frame
@@ -144,6 +154,7 @@ public class Weapon : MonoBehaviour
         anim.CrossFadeInFixedTime("Fire", 0.01f);
         fireEffect.Play();
         PlayShootSound();
+        UpdateAmmoText();
         currentBullets--;
         fireTimer = 0f;
     }
@@ -174,6 +185,7 @@ public class Weapon : MonoBehaviour
             return;
         }
         anim.CrossFadeInFixedTime("Reload", 0.01f);
+        UpdateAmmoText();
     }
 
     public void Reload()
@@ -189,10 +201,17 @@ public class Weapon : MonoBehaviour
         bulletLeft -= bulletsToDeduct;
         currentBullets += bulletsToDeduct;
 
+        UpdateAmmoText();
+
     }
 
     void PlayShootSound()
     {
         audioSource.PlayOneShot(shootSound);
+    }
+
+    void UpdateAmmoText()
+    {
+        ammoText.text = currentBullets + " / " + bulletLeft;
     }
 }
