@@ -1551,6 +1551,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4411051679754737215, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
+      propertyPath: spreadFactor
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 4411051679772841441, guid: 14a7c32bbf847c2418858d5ca40aef23, type: 3}
       propertyPath: m_Name
       value: FPSController
@@ -1669,6 +1673,10 @@ PrefabInstance:
       propertyPath: shootPoint
       value: 
       objectReference: {fileID: 1875330753}
+    - target: {fileID: 5792807355149152021, guid: 8df2585dc683a5442902dbf5942d5054, type: 3}
+      propertyPath: spreadFactor
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df2585dc683a5442902dbf5942d5054, type: 3}
 --- !u!1 &6015274638821777522 stripped
