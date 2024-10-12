@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
 
     private Color alphaAmount;
 
+    public bool isDead;
+
     void Start()
     {
         health = maxHealth;
@@ -50,6 +52,8 @@ public class PlayerHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            GameController.GC.ShowGameOver();
+            isDead = true;
             Debug.Log("game over!");
         }
 
