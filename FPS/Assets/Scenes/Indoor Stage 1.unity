@@ -947,9 +947,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd29692998d879d49bbd7527410e6586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   health: 100
   bloodImage: {fileID: 2073161267}
   redImage: {fileID: 394359996}
+  recoveryFactor: 3
+  recoveryRate: 5
 --- !u!1 &548050069
 GameObject:
   m_ObjectHideFlags: 0
