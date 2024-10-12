@@ -58,6 +58,7 @@ public class Soldier : MonoBehaviour
 
                 navMesh.SetDestination(Player.transform.position);
                 transform.LookAt(Player.transform);
+                shootPoint.LookAt(Player.transform);
             }
 
             if(!follow || shoot)
