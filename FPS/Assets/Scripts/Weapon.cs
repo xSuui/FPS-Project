@@ -153,7 +153,7 @@ public class Weapon : MonoBehaviour
             
             if (hit.transform.GetComponent<Soldier>())
             {
-                //Debug.Log("Hit");
+                Destroy(bullet);
                 hit.transform.GetComponent<Soldier>().ApplyDamage(damage);
             }
         }
